@@ -108,7 +108,7 @@ public class HtiPortalService {
 		// Id
 		task.setId(request.getTaskId());
 
-		// For
+		// For, be 1.0 compatible
 		final Task.User user = new Task.User();
 		user.setReference(request.getUserType() + "/" + request.getUserId());
 		task.setForUser(user);
@@ -125,10 +125,12 @@ public class HtiPortalService {
 		try {
 			JwtClaims claims = new JwtClaims();
 			claims.setClaim("task", toMap(task));
+			// Be 1.1 compatible.
+			claims.setSubject(request.getUserType() + "/" + request.getUserId());
 			claims.setIssuedAt(NumericDate.now());
 			claims.setAudience(request.getAud());
 			claims.setIssuer(request.getIss());
-			claims.setExpirationTime(NumericDate.fromMilliseconds(System.currentTimeMillis() + htiPortalConfiguration.getJwtTimeoutInSeconds() * 1000));
+			claims.setExpirationTime(NumericDate.fromMilliseconds(System.currentTimeMillis() + (long)htiPortalConfiguration.getJwtTimeoutInSeconds() * 1000));
 			claims.setJwtId(UUID.randomUUID().toString());
 
 			JsonWebSignature jws = new JsonWebSignature();
