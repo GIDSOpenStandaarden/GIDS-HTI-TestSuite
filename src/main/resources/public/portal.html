@@ -62,11 +62,8 @@
                                         <dt>For type (<b>for.reference</b>)</dt>
                                         <dd>The type part of the user reference, for example <b>Practitioner</b>/xyz.
                                         </dd>
-                                        <dt>For identifier(<b>for.reference</b>)</dt>
-                                        <dd>Identity part of of the user reference, for example Practitioner/<b>xyz</b>.
-                                            Must be persistent over time and may not refer in any way to personal
-                                            details of the user, such as e-mail or any other identification number.
-                                        </dd>
+                                        <dt>DEPRECATED. For identifier(<b>for.reference</b>)</dt>
+                                        <dd><b>This field is moved to the sub field as of version 1.1</b></dd>
                                         <dt>Intent(<b>intent</b>)</dt>
                                         <dd>The required field intent, must be one of <a
                                                 href="https://www.hl7.org/fhir/STU3/valueset-request-intent.html"
@@ -96,24 +93,6 @@
                         <input placeholder="Activity identifier" name="activity_id" id="activity_id" type="text"
                                class="identifier">
                         <label for="activity_id">Activity identifier</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <select name="user_type" id="user_type">
-                            <option value="-">-- Select a type --</option>
-                            <option value="Person">Person</option>
-                            <option value="Patient">Patient</option>
-                            <option value="Practitioner">Practitioner</option>
-                            <option value="RelatedPerson">RelatedPerson</option>
-                            <option value="Organization">Organization</option>
-                        </select>
-                        <label for="user_type">For type</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input placeholder="Activity identifier" name="user_id" id="user_id" type="text"
-                               class="identifier">
-                        <label for="user_id">For identifier</label>
                     </div>
                 </div>
                 <div class="row">
@@ -166,6 +145,10 @@
                                     <dd>The FHIR task as nested field. This field is populated by the values from the
                                         FHIR Task section.
                                     </dd>
+                                    <dt>Subject (<b>sub</b>)</dt>
+                                    <dd>The "sub" (Subject) field contains the value of the intended subject (user) of
+                                        this launch.
+                                    </dd>
                                     <dt>Audience (<b>aud</b>)</dt>
                                     <dd>The "aud" (Audience) field contains the value of the intended receiver of the
                                         message, in this case the module.
@@ -188,6 +171,24 @@
                                 </div>
                             </li>
                         </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select name="user_type" id="user_type">
+                            <option value="-">-- Select a type --</option>
+                            <option value="Person">Person</option>
+                            <option value="Patient">Patient</option>
+                            <option value="Practitioner">Practitioner</option>
+                            <option value="RelatedPerson">RelatedPerson</option>
+                            <option value="Organization">Organization</option>
+                        </select>
+                        <label for="user_type">Subject (sub) type</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Activity identifier" name="user_id" id="user_id" type="text"
+                               class="identifier">
+                        <label for="user_id">Subject (sub) identifier</label>
                     </div>
                 </div>
                 <div class="row">
