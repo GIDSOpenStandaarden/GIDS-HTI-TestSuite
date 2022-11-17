@@ -323,7 +323,7 @@
     };
 
     let loadPublicKey = function (done) {
-      fetch('public_key.txt')
+      fetch('public_key.pem')
         .then(function (response) {
           response.text().then(function (text) {
             $('div.public_key').text(text);

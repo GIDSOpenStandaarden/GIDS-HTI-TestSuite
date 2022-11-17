@@ -22,8 +22,17 @@ public class PublicKeyController {
 	private HtiPortalConfiguration htiPortalConfiguration;
 
 	@RequestMapping(value = "public_key.txt", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String get() {
+	public String getText() {
 		return htiPortalConfiguration.getSigningPublicKey();
+	}
+
+	@RequestMapping(value = "public_key.pem", produces = "application/x-pem-file")
+	public String getPem() {
+		StringBuilder s = new StringBuilder();
+		s.append("-----BEGIN PUBLIC KEY-----\n");
+		s.append(htiPortalConfiguration.getSigningPublicKey());
+		s.append("-----END PUBLIC KEY-----\n");
+		return s.toString();
 	}
 
 	@Autowired
