@@ -105,6 +105,20 @@ public class KeyUtils {
 		return rv.toString();
 	}
 
+	public static String formatPem(final String base64DerEncoded) {
+		StringBuilder s = new StringBuilder();
+		s.append("-----BEGIN PUBLIC KEY-----\n");
+		String pk = base64DerEncoded;
+		while(StringUtils.length(pk) > 0) {
+			int length = Math.min(64, StringUtils.length(pk));
+			s.append(StringUtils.substring(pk, 0, length));
+			s.append('\n');
+			pk = StringUtils.substring(pk, length);
+		}
+		s.append("-----END PUBLIC KEY-----\n");
+		return s.toString();
+	}
+
 	public static String encodeKey(Key key) {
      return encodeBase64String(key.getEncoded());
  }

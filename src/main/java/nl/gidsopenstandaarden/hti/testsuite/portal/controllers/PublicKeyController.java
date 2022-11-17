@@ -9,6 +9,8 @@
 package nl.gidsopenstandaarden.hti.testsuite.portal.controllers;
 
 import nl.gidsopenstandaarden.hti.testsuite.portal.configuration.HtiPortalConfiguration;
+import nl.gidsopenstandaarden.hti.testsuite.portal.utils.KeyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +30,7 @@ public class PublicKeyController {
 
 	@RequestMapping(value = "public_key.pem", produces = "application/x-pem-file")
 	public String getPem() {
-		StringBuilder s = new StringBuilder();
-		s.append("-----BEGIN PUBLIC KEY-----\n");
-		s.append(htiPortalConfiguration.getSigningPublicKey());
-		s.append("-----END PUBLIC KEY-----\n");
-		return s.toString();
+		return KeyUtils.formatPem(htiPortalConfiguration.getSigningPublicKey());
 	}
 
 	@Autowired

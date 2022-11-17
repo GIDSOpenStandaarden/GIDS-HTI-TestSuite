@@ -43,7 +43,9 @@ img.gids_logo {
 
 .public_key {
     font-family: monospace;
-    word-break: break-all;
+    display: block;
+    unicode-bidi: embed;
+    white-space: pre;
 }
 
 textarea.token, textarea.publicKey {
