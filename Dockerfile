@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-11 AS build
+FROM maven:3.9.9-amazoncorretto-23-alpine AS build
 
 ADD pom.xml /
 
@@ -6,7 +6,7 @@ ADD src /src
 
 RUN mvn --quiet clean package
 
-FROM openjdk:8u181-jre-alpine
+FROM amazoncorretto:21-alpine
 
 RUN apk update && apk add bash openssl
 

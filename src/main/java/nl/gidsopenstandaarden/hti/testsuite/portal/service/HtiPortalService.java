@@ -9,6 +9,7 @@
 package nl.gidsopenstandaarden.hti.testsuite.portal.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import nl.gidsopenstandaarden.hti.testsuite.portal.configuration.HtiPortalConfiguration;
 import nl.gidsopenstandaarden.hti.testsuite.portal.utils.KeyUtils;
 import nl.gidsopenstandaarden.hti.testsuite.portal.valueobject.HtiPortalLaunchRequest;
@@ -26,7 +27,6 @@ import org.jose4j.lang.JoseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.GeneralSecurityException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;

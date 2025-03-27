@@ -11,7 +11,7 @@ package nl.gidsopenstandaarden.hti.testsuite.shared;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  *

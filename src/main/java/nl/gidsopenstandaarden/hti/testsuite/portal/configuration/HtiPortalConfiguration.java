@@ -8,6 +8,7 @@
 
 package nl.gidsopenstandaarden.hti.testsuite.portal.configuration;
 
+import jakarta.annotation.PostConstruct;
 import nl.gidsopenstandaarden.hti.testsuite.portal.utils.KeyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -15,7 +16,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 
