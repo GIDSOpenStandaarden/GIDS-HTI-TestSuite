@@ -9,6 +9,7 @@
 package nl.gidsopenstandaarden.hti.testsuite.portal.valueobject;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.gidsopenstandaarden.hti.testsuite.portal.service.HtiPortalService;
 
 /**
  *
@@ -41,6 +42,16 @@ public class HtiPortalLaunchRequest {
 	 */
 	@JsonProperty("public_key")
 	private String publicKey;
+	@JsonProperty("version")
+	private HtiPortalService.HtiVersion version;
+
+	public HtiPortalService.HtiVersion getVersion() {
+		return version;
+	}
+
+	public void setVersion(HtiPortalService.HtiVersion version) {
+		this.version = version;
+	}
 
 	public String getActivityId() {
 		return activityId;

@@ -40,6 +40,10 @@ import java.util.UUID;
 @Service
 public class HtiPortalService {
 
+	public enum HtiVersion {
+		HTI_1_1, HTI_2_0
+	}
+
 	private HtiPortalConfiguration htiPortalConfiguration;
 
 	private ObjectMapper objectMapper;
@@ -60,6 +64,8 @@ public class HtiPortalService {
 
 		request.setIntent("plan");
 		request.setStatus("requested");
+
+		request.setVersion(HtiVersion.HTI_2_0);
 
 		request.setAud(htiPortalConfiguration.getAud());
 		final String iss = htiPortalConfiguration.getIss();
@@ -124,8 +130,20 @@ public class HtiPortalService {
 	protected String getLaunchToken(Task task, HtiPortalLaunchRequest request) throws GeneralSecurityException {
 		try {
 			JwtClaims claims = new JwtClaims();
-			claims.setClaim("task", toMap(task));
-			// Be 1.1 compatible.
+			if (request.getVersion() == HtiVersion.HTI_1_1) {
+				claims.setClaim("task", toMap(task));
+				claims.setClaim("hti-version", "1.1");
+			} else {
+				claims.setClaim("resource", "Task/" + task.getId());
+				if (task.getDefinitionReference() != null) {
+					claims.setClaim("definition", task.getDefinitionReference().getReference());
+				}
+				if (task.getForUser() != null) {
+					claims.setClaim("patient", task.getForUser().getReference());
+				}
+				claims.setClaim("intent", task.getIntent());
+				claims.setClaim("hti-version", "2.0");
+			}
 			claims.setSubject(request.getUserType() + "/" + request.getUserId());
 			claims.setIssuedAt(NumericDate.now());
 			claims.setAudience(request.getAud());
